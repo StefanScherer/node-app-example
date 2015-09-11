@@ -1,0 +1,19 @@
+version: "{build}"
+skip_tags: true
+os: Visual Studio 2015
+
+environment:
+  node_version: "4.0.0"
+
+install:
+- ps: Install-Product node $env:node_version x64
+- ps: packaging\msi\install.ps1
+
+build_script:
+- ps: packaging\msi\build.ps1
+
+test: off
+
+artifacts:
+- path: output/*.exe
+  name: binary
